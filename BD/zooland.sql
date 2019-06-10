@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2019 a las 19:05:23
--- Versión del servidor: 10.1.40-MariaDB
--- Versión de PHP: 7.3.5
+-- Tiempo de generación: 10-06-2019 a las 11:34:52
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `veterinaria`
+-- Base de datos: `zooland`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `cedula` varchar(10) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT NULL,
+  `telefono` varchar(10) DEFAULT NULL,
+  `PASSWORD` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`cedula`, `nombre`, `correo`, `telefono`, `PASSWORD`) VALUES
+('1090464770', 'GERSON GOMEZ', 'GERSON@GMAIL.COM', '3158745652', '123456789');
 
 -- --------------------------------------------------------
 
@@ -34,6 +55,13 @@ CREATE TABLE `adopcion` (
   `fecha_adopcion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `adopcion`
+--
+
+INSERT INTO `adopcion` (`id_persona`, `id_animal`, `fecha_adopcion`) VALUES
+(1090464771, 1, '2019-06-10');
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +72,13 @@ CREATE TABLE `adoptador` (
   `nom_adoptador` varchar(30) NOT NULL,
   `id_adoptador` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `adoptador`
+--
+
+INSERT INTO `adoptador` (`nom_adoptador`, `id_adoptador`) VALUES
+('brandon', 1090464771);
 
 -- --------------------------------------------------------
 
@@ -61,6 +96,13 @@ CREATE TABLE `animal` (
   `id_tipo` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `animal`
+--
+
+INSERT INTO `animal` (`id_animal`, `nom_animal`, `color`, `edad`, `estado`, `id_raza`, `id_tipo`) VALUES
+(1, 'teo', 'gris', 5, 0, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +119,13 @@ CREATE TABLE `animal_tratamiento` (
   `id_tratamiento_proceso` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `animal_tratamiento`
+--
+
+INSERT INTO `animal_tratamiento` (`id_animal`, `descripcion_at`, `fecha_inicio`, `fecha_fin`, `id_persona_v`, `cantidad`, `id_tratamiento_proceso`) VALUES
+(1, 'hola3', '2019-06-07', '2019-06-28', 1090464771, 123, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +139,13 @@ CREATE TABLE `animal_vacuna` (
   `fecha_vencimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `animal_vacuna`
+--
+
+INSERT INTO `animal_vacuna` (`id_animal`, `id_vacuna`, `fecha_aplicacion`, `fecha_vencimiento`) VALUES
+(1, 1, '2019-06-29', '2019-06-30');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +158,13 @@ CREATE TABLE `padrinar` (
   `monto` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `padrinar`
+--
+
+INSERT INTO `padrinar` (`id_persona`, `id_animal`, `monto`) VALUES
+(1090464774, 1, 5000);
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +176,13 @@ CREATE TABLE `padrino` (
   `id_padrino` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `padrino`
+--
+
+INSERT INTO `padrino` (`nom_padrino`, `id_padrino`) VALUES
+('fanny', 1090464774);
+
 -- --------------------------------------------------------
 
 --
@@ -122,11 +192,19 @@ CREATE TABLE `padrino` (
 CREATE TABLE `persona` (
   `documento` int(10) NOT NULL,
   `nombre` varchar(20) NOT NULL,
-  `apellido` varchar(20) NOT NULL,
   `direccion` text NOT NULL,
   `ciudad` varchar(15) NOT NULL,
   `telefono` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`documento`, `nombre`, `direccion`, `ciudad`, `telefono`) VALUES
+(1090446889, 'nohora', 'calle 16an #17e-92', 'cucuta', 2147483647),
+(1090464771, 'brandon', 'asdadadadadada', 'cucuta', 646464),
+(1090464774, 'fanny', 'no me la se', 'ureÃ±a', 78945612);
 
 -- --------------------------------------------------------
 
@@ -140,6 +218,13 @@ CREATE TABLE `proceso` (
   `descripcion_proceso` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `proceso`
+--
+
+INSERT INTO `proceso` (`id_proceso`, `nom_proceso`, `descripcion_proceso`) VALUES
+(1, 'p\'atear', 'hola2');
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +236,14 @@ CREATE TABLE `raza` (
   `id_raza` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `raza`
+--
+
+INSERT INTO `raza` (`nom_raza`, `id_raza`) VALUES
+('gerson', 1),
+('mk', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +254,15 @@ CREATE TABLE `tipo` (
   `id_tipo` int(10) NOT NULL,
   `nom_tipo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo`
+--
+
+INSERT INTO `tipo` (`id_tipo`, `nom_tipo`) VALUES
+(1, 'perro'),
+(2, 'DRAGON'),
+(3, 'ACUATICO');
 
 -- --------------------------------------------------------
 
@@ -174,6 +276,13 @@ CREATE TABLE `tratamiento` (
   `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tratamiento`
+--
+
+INSERT INTO `tratamiento` (`id_tratamiento`, `descripcion_tratamiento`, `nombre`) VALUES
+(1, 'hola', 'golpes');
+
 -- --------------------------------------------------------
 
 --
@@ -185,6 +294,13 @@ CREATE TABLE `tratamiento_proceso` (
   `id_proceso` int(10) NOT NULL,
   `id_tratamiento_proceso` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tratamiento_proceso`
+--
+
+INSERT INTO `tratamiento_proceso` (`id_tratamiento`, `id_proceso`, `id_tratamiento_proceso`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -198,6 +314,13 @@ CREATE TABLE `vacuna` (
   `descripcion_vacuna` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `vacuna`
+--
+
+INSERT INTO `vacuna` (`id_vacuna`, `nom_vacuna`, `descripcion_vacuna`) VALUES
+(1, 'tetano', 'NO FUNCIONA, PQ ES PURA AGUA MANITO');
+
 -- --------------------------------------------------------
 
 --
@@ -206,12 +329,26 @@ CREATE TABLE `vacuna` (
 
 CREATE TABLE `veterinario` (
   `nom_veterinario` varchar(30) NOT NULL,
-  `id_veterinario` int(10) NOT NULL
+  `id_veterinario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `veterinario`
+--
+
+INSERT INTO `veterinario` (`nom_veterinario`, `id_veterinario`) VALUES
+('nohora', 1090446889),
+('brandon', 1090464771);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`cedula`);
 
 --
 -- Indices de la tabla `adopcion`
