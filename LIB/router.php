@@ -5,9 +5,7 @@ class Router {
 
   private $sesion;
   function __construct() {
-    require_once "MODEL/OBJ/consultorio.php";
-    require_once "MODEL/OBJ/persona.php";
-    require_once "MODEL/OBJ/cita.php";
+    
     $sesion = new Sesion();
     $this->validarSesion();
   }
