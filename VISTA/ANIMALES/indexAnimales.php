@@ -70,7 +70,7 @@
               class='far'>&#xf302;</i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="aniad.html">&nbsp&nbsp Animalitos para Adoptar &nbsp&nbsp<i
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/aniad">&nbsp&nbsp Animalitos para Adoptar &nbsp&nbsp<i
               class="fas fa-eye"></i></a>
         </li>
         <li class="nav-item active">

@@ -69,24 +69,24 @@
               class='far'>&#xf302;</i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="aniad.html">&nbsp&nbsp Animalitos para Adoptar &nbsp&nbsp<i
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/aniad">&nbsp&nbsp Animalitos para Adoptar &nbsp&nbsp<i
               class="fas fa-eye"></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/animales">&nbsp&nbspAnimales&nbsp&nbsp<i
-              style='font-size:24px' class='fas fa-paw'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/animales">&nbsp&nbspAnimales&nbsp&nbsp<i style='font-size:24px'
+              class='fas fa-paw'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/tratamientos">&nbsp&nbspTratamientos&nbsp&nbsp<i
-              style='font-size:24px' class='fas fa-heartbeat'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/tratamientos">&nbsp&nbspTratamientos&nbsp&nbsp<i style='font-size:24px'
+              class='fas fa-heartbeat'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/vacunas">&nbsp&nbspVacunas&nbsp&nbsp<i
-              style='font-size:24px' class='fas fa-first-aid'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/vacunas">&nbsp&nbspVacunas&nbsp&nbsp<i style='font-size:24px'
+              class='fas fa-first-aid'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/personas">&nbsp&nbspPersonas&nbsp&nbsp<i
-              style='font-size:24px' class='fas fa-user-alt'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/personas">&nbsp&nbspPersonas&nbsp&nbsp<i style='font-size:24px'
+              class='fas fa-user-alt'></i></a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

@@ -54,6 +54,13 @@ class VistasControlador extends Controlador{
     $this->getCtrVista()->render("personas");
   }
 
+  public function aniad()  {
+    $this->getCtrVista()->animales = $this->getCtrModel()->animales();
+    $this->getCtrVista()->especies = $this->getCtrModel()->especies();
+    $this->getCtrVista()->razas = $this->getCtrModel()->razas();
+    $this->getCtrVista()->render("aniad");
+  }
+
 
 
 }
