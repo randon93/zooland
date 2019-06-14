@@ -352,7 +352,9 @@
                   </thead>
                   <tbody id="myTable3">
 
-                    <?php foreach ($this->animales as $animal) {?>
+                    <?php foreach ($this->animales as $animal) { if ($animal['estado'] > 0) {
+                      # code...
+                    ?>
                     <tr>
                       <td><?php echo $animal['nom_animal'];?></td>
                        <?php foreach ($this->especies as $especie) {
@@ -377,7 +379,7 @@
                       <td align="center"> <input name="cb[]" type="checkbox" value="<?php echo $animal['id_animal'];?>">
                       </td>
                     </tr>
-                    <?php } ?>
+                    <?php }} ?>
 
                   </tbody>
                 </table>
