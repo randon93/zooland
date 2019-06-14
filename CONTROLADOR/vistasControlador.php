@@ -16,6 +16,7 @@ class VistasControlador extends Controlador{
     $this->getCtrVista()->razas = $this->getCtrModel()->razas();
     $this->getCtrVista()->personas = $this->getCtrModel()->personas();
     $this->getCtrVista()->animales = $this->getCtrModel()->animales();
+    
     $this->getCtrVista()->render("animales");
   }
 

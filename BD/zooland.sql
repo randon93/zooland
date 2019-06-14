@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-06-2019 a las 09:18:57
+-- Tiempo de generación: 10-06-2019 a las 11:34:52
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -55,6 +55,13 @@ CREATE TABLE `adopcion` (
   `fecha_adopcion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `adopcion`
+--
+
+INSERT INTO `adopcion` (`id_persona`, `id_animal`, `fecha_adopcion`) VALUES
+(1090464771, 1, '2019-06-10');
+
 -- --------------------------------------------------------
 
 --
@@ -84,57 +91,17 @@ CREATE TABLE `animal` (
   `nom_animal` varchar(20) NOT NULL,
   `color` varchar(10) NOT NULL,
   `edad` int(11) NOT NULL,
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL,
+  `id_raza` int(10) NOT NULL,
+  `id_tipo` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `animal`
 --
 
-INSERT INTO `animal` (`id_animal`, `nom_animal`, `color`, `edad`, `estado`) VALUES
-(1, 'gerson', '<H1>NEGRO<', 23, 1),
-(2, 'GERSON', '<H1>NEGRO<', 25, 1),
-(3, 'GERSON', '<H1>NEGRO<', 25, 1),
-(4, 'GERSON', '<H1>NEGRO<', 25, 1),
-(5, 'GERSON', '<H1> NEGRO', 124, 1),
-(6, 'gerson ', '<h1> negro', 25, 1),
-(7, 'gerson ', '<h1> negro', 25, 1),
-(8, 'gerson ', ' negro ', 25, 1),
-(9, 'gerson ', ' negro ', 25, 1),
-(10, 'gerson ', ' negro ', 25, 1),
-(11, 'paola', 'blanca', 12, 1),
-(12, 'paola', 'blanca', 12, 1),
-(13, 'paola', 'blanca', 12, 1),
-(14, 'gerson', '<h1> NEGRO', 12, 1),
-(15, 'gerson ', '<h1> NEGRO', 34, 1),
-(16, 'gerson', '<h1> NEGRO', 25, 1),
-(17, 'gerson', '<h1> NEGRO', 25, 1),
-(18, 'gerson', 'negor', 12, 1),
-(19, 'gerson', 'negor', 12, 1),
-(20, 'teo', 'gris', 6, 1),
-(21, '', '', 0, 1),
-(22, 'lilit', 'negra', 2, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `animal_tipo_raza`
---
-
-CREATE TABLE `animal_tipo_raza` (
-  `id_tipo_raza` int(11) NOT NULL,
-  `id_animal` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `animal_tipo_raza`
---
-
-INSERT INTO `animal_tipo_raza` (`id_tipo_raza`, `id_animal`) VALUES
-(2, 22),
-(4, 19),
-(4, 20),
-(5, 21);
+INSERT INTO `animal` (`id_animal`, `nom_animal`, `color`, `edad`, `estado`, `id_raza`, `id_tipo`) VALUES
+(1, 'teo', 'gris', 5, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -152,6 +119,13 @@ CREATE TABLE `animal_tratamiento` (
   `id_tratamiento_proceso` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `animal_tratamiento`
+--
+
+INSERT INTO `animal_tratamiento` (`id_animal`, `descripcion_at`, `fecha_inicio`, `fecha_fin`, `id_persona_v`, `cantidad`, `id_tratamiento_proceso`) VALUES
+(1, 'hola3', '2019-06-07', '2019-06-28', 1090464771, 123, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -165,6 +139,13 @@ CREATE TABLE `animal_vacuna` (
   `fecha_vencimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `animal_vacuna`
+--
+
+INSERT INTO `animal_vacuna` (`id_animal`, `id_vacuna`, `fecha_aplicacion`, `fecha_vencimiento`) VALUES
+(1, 1, '2019-06-29', '2019-06-30');
+
 -- --------------------------------------------------------
 
 --
@@ -176,6 +157,13 @@ CREATE TABLE `padrinar` (
   `id_animal` int(10) NOT NULL,
   `monto` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `padrinar`
+--
+
+INSERT INTO `padrinar` (`id_persona`, `id_animal`, `monto`) VALUES
+(1090464774, 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -253,14 +241,8 @@ CREATE TABLE `raza` (
 --
 
 INSERT INTO `raza` (`nom_raza`, `id_raza`) VALUES
-('dorymyrmex', 1),
-('dorymyrmex', 2),
-('dorymyrmex', 3),
-('dorymyrmex', 4),
-('pheloide', 5),
-('angora', 6),
-('Terrier', 7),
-('bulldog', 8);
+('gerson', 1),
+('mk', 2);
 
 -- --------------------------------------------------------
 
@@ -279,35 +261,8 @@ CREATE TABLE `tipo` (
 
 INSERT INTO `tipo` (`id_tipo`, `nom_tipo`) VALUES
 (1, 'perro'),
-(2, 'gato'),
-(3, 'hormiga');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipo_raza`
---
-
-CREATE TABLE `tipo_raza` (
-  `id` int(11) NOT NULL,
-  `id_tipo` int(10) DEFAULT NULL,
-  `id_raza` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tipo_raza`
---
-
-INSERT INTO `tipo_raza` (`id`, `id_tipo`, `id_raza`) VALUES
-(1, 3, 4),
-(2, 3, 5),
-(3, 2, 6),
-(4, 1, 7),
-(5, 1, 8),
-(6, 1, 7),
-(7, 1, 7),
-(8, 1, 8),
-(9, 3, 5);
+(2, 'DRAGON'),
+(3, 'ACUATICO');
 
 -- --------------------------------------------------------
 
@@ -412,15 +367,9 @@ ALTER TABLE `adoptador`
 -- Indices de la tabla `animal`
 --
 ALTER TABLE `animal`
-  ADD PRIMARY KEY (`id_animal`);
-
---
--- Indices de la tabla `animal_tipo_raza`
---
-ALTER TABLE `animal_tipo_raza`
-  ADD PRIMARY KEY (`id_tipo_raza`,`id_animal`),
-  ADD KEY `fk_animal` (`id_animal`),
-  ADD KEY `id_tipo_raza` (`id_tipo_raza`);
+  ADD PRIMARY KEY (`id_animal`),
+  ADD UNIQUE KEY `id_raza` (`id_raza`),
+  ADD UNIQUE KEY `id_tipo` (`id_tipo`);
 
 --
 -- Indices de la tabla `animal_tratamiento`
@@ -477,14 +426,6 @@ ALTER TABLE `tipo`
   ADD PRIMARY KEY (`id_tipo`);
 
 --
--- Indices de la tabla `tipo_raza`
---
-ALTER TABLE `tipo_raza`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tipo_raza` (`id_tipo`),
-  ADD KEY `fk_raza_tipo` (`id_raza`);
-
---
 -- Indices de la tabla `tratamiento`
 --
 ALTER TABLE `tratamiento`
@@ -511,16 +452,6 @@ ALTER TABLE `veterinario`
   ADD UNIQUE KEY `id_veterinario` (`id_veterinario`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `tipo_raza`
---
-ALTER TABLE `tipo_raza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -538,11 +469,11 @@ ALTER TABLE `adoptador`
   ADD CONSTRAINT `adoptador_persona` FOREIGN KEY (`id_adoptador`) REFERENCES `persona` (`documento`);
 
 --
--- Filtros para la tabla `animal_tipo_raza`
+-- Filtros para la tabla `animal`
 --
-ALTER TABLE `animal_tipo_raza`
-  ADD CONSTRAINT `animal_tipo_raza_ibfk_1` FOREIGN KEY (`id_tipo_raza`) REFERENCES `tipo_raza` (`id`),
-  ADD CONSTRAINT `fk_animal` FOREIGN KEY (`id_animal`) REFERENCES `animal` (`id_animal`);
+ALTER TABLE `animal`
+  ADD CONSTRAINT `animal-raza` FOREIGN KEY (`id_raza`) REFERENCES `raza` (`id_raza`),
+  ADD CONSTRAINT `animal-tipo` FOREIGN KEY (`id_tipo`) REFERENCES `tipo` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `animal_tratamiento`
@@ -571,13 +502,6 @@ ALTER TABLE `padrinar`
 --
 ALTER TABLE `padrino`
   ADD CONSTRAINT `persona_padrino` FOREIGN KEY (`id_padrino`) REFERENCES `persona` (`documento`);
-
---
--- Filtros para la tabla `tipo_raza`
---
-ALTER TABLE `tipo_raza`
-  ADD CONSTRAINT `fk_raza_tipo` FOREIGN KEY (`id_raza`) REFERENCES `raza` (`id_raza`),
-  ADD CONSTRAINT `fk_tipo_raza` FOREIGN KEY (`id_tipo`) REFERENCES `tipo` (`id_tipo`);
 
 --
 -- Filtros para la tabla `tratamiento_proceso`
