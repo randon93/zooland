@@ -300,7 +300,7 @@
 
                 </div>
                 <div class="form-group">
-                  <select id="lista1" name="especie" >
+                  <select class="form-control" id="lista1" name="especie" >
                     <option value="0">Selecciona una opcion</option>
                     <?php foreach ($this->especies as $especie) {?>
                     <option value="<?php echo $especie['id_tipo'];?>"><?php echo $especie['nom_tipo'];?></option>
