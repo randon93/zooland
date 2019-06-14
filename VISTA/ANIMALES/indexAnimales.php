@@ -252,7 +252,7 @@
                       <th>Especie</th>
                       <th>Raza</th>
                       <th>Edad</th>
-                      <th>confirmar</th>
+                      <th>confirmar </th>
 
                     </tr>
                   </thead>
@@ -261,8 +261,24 @@
                     <?php foreach ($this->animales as $animal) {?>
                     <tr>
                       <td><?php echo $animal['nom_animal'];?></td>
-                      <td><?php echo $animal['id_tipo'];?></td>
-                      <td><?php echo $animal['id_raza'];?></td>
+                       <?php foreach ($this->especies as $especie) {
+                        if ($animal['id_tipo'] == $especie['id_tipo']) {
+                          echo "<td>".$especie['nom_tipo']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
+                    <?php foreach ($this->razas as $especie) {
+                        if ($animal['id_raza'] == $especie['id_raza']) {
+                          echo "<td>".$especie['nom_raza']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
                       <td><?php echo $animal['edad'];?></td>
                       <td align="center"> <input name="cb2[]" type="checkbox"
                           value="<?php echo $animal['id_animal'];?>">
@@ -339,8 +355,24 @@
                     <?php foreach ($this->animales as $animal) {?>
                     <tr>
                       <td><?php echo $animal['nom_animal'];?></td>
-                      <td><?php echo $animal['id_tipo'];?></td>
-                      <td><?php echo $animal['id_raza'];?></td>
+                       <?php foreach ($this->especies as $especie) {
+                        if ($animal['id_tipo'] == $especie['id_tipo']) {
+                          echo "<td>".$especie['nom_tipo']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
+                    <?php foreach ($this->razas as $especie) {
+                        if ($animal['id_raza'] == $especie['id_raza']) {
+                          echo "<td>".$especie['nom_raza']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
                       <td><?php echo $animal['edad'];?></td>
                       <td align="center"> <input name="cb[]" type="checkbox" value="<?php echo $animal['id_animal'];?>">
                       </td>
@@ -377,8 +409,24 @@
                   <?php foreach ($this->animales as $animal) {?>
                   <tr>
                     <td><?php echo $animal['nom_animal'];?></td>
-                    <td><?php echo $animal['id_tipo'];?></td>
-                    <td><?php echo $animal['id_raza'];?></td>
+                    <?php foreach ($this->especies as $especie) {
+                        if ($animal['id_tipo'] == $especie['id_tipo']) {
+                          echo "<td>".$especie['nom_tipo']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
+                    <?php foreach ($this->razas as $especie) {
+                        if ($animal['id_raza'] == $especie['id_raza']) {
+                          echo "<td>".$especie['nom_raza']."</td>";
+                          break;
+                        }
+                        
+                      }
+                      
+                     ?>
                     <td><?php echo $animal['edad'];?></td>
                     <td><?php echo $animal['color'];?></td>
                   </tr>
@@ -405,8 +453,14 @@
                 <tbody>
                   <?php foreach ($this->razas as $raza) { ?>
                   <tr>
-                    <td><?php echo $raza['id_raza'];?></td>
                     <td><?php echo $raza['nom_raza'];?></td>
+                    <?php foreach ($this->especies as $especie) {
+                      if ($raza['id_especie'] == $especie['id_tipo']) {
+                       echo  "<td>". $especie['nom_tipo']."</td>";
+                       break;
+                      }
+                    }?>
+                    
                   </tr>
                   <?php } ?>
 
