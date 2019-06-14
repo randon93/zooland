@@ -127,6 +127,29 @@ class VistasModel extends Modelo{
     return $especies;
   }
 
+  public function datos($especie)  {
+    $con = $this->bd->conectar();
+    $sql="SELECT * FROM raza r INNER JOIN tipo_raza tr ON r.id_raza = tr.id_raza WHERE tr.id_tipo = $especie GROUP BY r.nom_raza";
+    $result = $con -> prepare($sql);
+    $result -> execute();
+    $cadena="<br><div class='form-group'>
+                  <label>Raza : </label>
+
+                </div>
+                <select id='lista2' name='raza'>";
+      
+      
+
+    foreach ($result as $ver) {
+      $cadena = $cadena . '<option value=' . $ver['id_raza'] . '>' .utf8_encode($ver['nom_raza']) . '</option>';
+    }
+	// while ($ver=mysqli_fetch_row($result)) {
+	// 	$cadena=$cadena.'<option value='.$ver[0].'>'.utf8_encode($ver[2]).'</option>';
+	// }
+
+    $r =  $cadena."</select>";
+    return $r;
+  }
 
 }
  ?>

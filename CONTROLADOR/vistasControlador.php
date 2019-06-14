@@ -60,7 +60,11 @@ class VistasControlador extends Controlador{
     $this->getCtrVista()->razas = $this->getCtrModel()->razas();
     $this->getCtrVista()->render("aniad");
   }
-
+public function datos(){
+  $continente=$_POST['continente'];
+  echo $this->getCtrModel()->datos($continente);
+  
+}
 
 
 }

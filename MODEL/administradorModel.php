@@ -15,12 +15,21 @@ class AdministradorModel extends Modelo{
     $con = $this->bd->cerrarCon();
   }
 
-  public function agregarRaza($raza)  {
+  public function agregarRaza($raza, $especie)  {
     $sql = "INSERT INTO raza(nom_raza, id_raza) VALUES ( :nombre, :id)";
     $con = $this->bd->conectar();
     $consultar = $con ->prepare($sql);
     $id = $this->tamaño("raza") + 1;
     $consultar -> execute( array(":id"=>$id, ":nombre"=>$raza) );
+    $this->agregarTipoRaza($id, $especie);
+    $con = $this->bd->cerrarCon();
+  }
+
+  public function agregarTipoRaza($raza, $especie)  {
+    $con = $this->bd->conectar();
+    $consultar = $con -> prepare("INSERT INTO `tipo_raza`(`id`,`id_raza`, `id_tipo`) VALUES (:id,:raza, :especie)");
+    $id = $this->tamaño("tipo_raza") + 1;
+    $consultar -> execute( array(":id"=>$id, ":raza"=>$raza, ":especie"=>$especie) );
     $con = $this->bd->cerrarCon();
   }
 
@@ -43,9 +52,34 @@ class AdministradorModel extends Modelo{
   public function agregarAnimal($nombre, $color, $edad, $raza, $especie)  {
     $con = $this->bd->conectar();
     $id = $this->tamaño("animal") + 1;
-    $consultar = $con -> prepare("INSERT INTO `animal`(`id_animal`, `nom_animal`, `color`, `edad`, `estado`, `id_raza`, `id_tipo`) VALUES (:id, :nombre, :color, :edad, :estado, :raza, :tipo)");
-    $consultar -> execute( array(":id"=>$id, ":nombre"=>$nombre, ":color"=>$color, ":edad"=>$edad, ":estado"=>1, ":raza"=>$raza, ":tipo"=>$especie) );
+    $consultar = $con -> prepare("INSERT INTO `animal`(`id_animal`, `nom_animal`, `color`, `edad`, `estado`) VALUES (:id, :nombre, :color, :edad, :estado)");
+    $consultar -> execute( array(":id"=>$id, ":nombre"=>$nombre, ":color"=>$color, ":edad"=>$edad, ":estado"=>1) );
+    $er = $this->buscarTipoRaza($especie, $raza);
+    $this->animalTipo($raza, $especie);
+    $this->animalTipoRaza($er, $id);
+    
+  }
 
+  public function animalTipoRaza($er, $id)  {
+    $con = $this->bd->conectar();
+    $consultar = $con -> prepare("INSERT INTO `animal_tipo_raza`(`id_tipo_raza`, `id_animal`) VALUES (:tipoRaza, :animal)");
+    $consultar -> execute( array(":tipoRaza"=>$er, ":animal"=>$id) );
+  }
+
+  public function buscarTipoRaza($tipo, $raza)  {
+    $con = $this->bd->conectar();
+    $consultar = $con -> prepare("SELECT id FROM tipo_raza WHERE id_tipo = :tipo AND id_raza = :raza");
+    $consultar -> execute( array(":tipo"=>$tipo, ":raza"=>$raza) );
+    foreach ($consultar as $value) {
+      return $value['id'];
+    }
+  }
+
+  public function animalTipo($raza, $especie)  {
+    $con = $this->bd->conectar();
+    $consultar = $con -> prepare("INSERT INTO `tipo_raza`(`id`, `id_tipo`, `id_raza`) VALUES ( :id, :tipo, :raza)");
+    $id = $this->tamaño('tipo_raza') + 1;
+    $consultar -> execute( array(":id"=>$id, ":tipo"=>$especie, ":raza"=>$raza) );
   }
 
   public function darBaja($animal)  {

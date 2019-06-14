@@ -70,24 +70,24 @@
               class='far'>&#xf302;</i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/aniad">&nbsp&nbsp Animalitos para Adoptar &nbsp&nbsp<i
-              class="fas fa-eye"></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/aniad">&nbsp&nbsp Animalitos para Adoptar
+            &nbsp&nbsp<i class="fas fa-eye"></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/animales">&nbsp&nbspAnimales&nbsp&nbsp<i style='font-size:24px'
-              class='fas fa-paw'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/animales">&nbsp&nbspAnimales&nbsp&nbsp<i
+              style='font-size:24px' class='fas fa-paw'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/tratamientos">&nbsp&nbspTratamientos&nbsp&nbsp<i style='font-size:24px'
-              class='fas fa-heartbeat'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/tratamientos">&nbsp&nbspTratamientos&nbsp&nbsp<i
+              style='font-size:24px' class='fas fa-heartbeat'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/vacunas">&nbsp&nbspVacunas&nbsp&nbsp<i style='font-size:24px'
-              class='fas fa-first-aid'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/vacunas">&nbsp&nbspVacunas&nbsp&nbsp<i
+              style='font-size:24px' class='fas fa-first-aid'></i></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="<?php echo constant('URL');?>vistas/personas">&nbsp&nbspPersonas&nbsp&nbsp<i style='font-size:24px'
-              class='fas fa-user-alt'></i></a>
+          <a class="nav-link" href="<?php echo constant('URL');?>vistas/personas">&nbsp&nbspPersonas&nbsp&nbsp<i
+              style='font-size:24px' class='fas fa-user-alt'></i></a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -188,7 +188,7 @@
                 <br>
                 <br>
                 <div class="form-group">
-                  <select class="form-control">
+                  <select class="form-control" name="especie">
                     <?php foreach ($this->especies as $especie) { ?>
                     <option value="<?php echo $especie['id_tipo'];?>" selected><?php echo $especie['nom_tipo'];?>
                     </option>
@@ -300,24 +300,18 @@
 
                 </div>
                 <div class="form-group">
-                  <select class="form-control" id="sel2" name="especie">
+                  <!-- <label>Especies</label> -->
+                  <select id="lista1" name="especie">
+                    <option value="0">Selecciona una opcion</option>
                     <?php foreach ($this->especies as $especie) {?>
-                    <option value="<?php echo $especie['id_tipo'];?>"> <?php echo $especie['nom_tipo'];?></option>
-                    <?php } ?>
+                    <option value="<?php echo $especie['id_tipo'];?>"><?php echo $especie['nom_tipo'];?></option>
+                    <?php }?>
                   </select>
+                  <br>
+                  <div id="select2lista"></div>
                 </div>
                 <br>
-                <div class="form-group">
-                  <label>Raza :</label>
-                </div>
 
-                <div class="form-group">
-                  <select class="form-control" id="sel3" name="raza">
-                    <?php foreach ($this->razas as $raza) {?>
-                    <option value="<?php echo $raza['id_raza'];?>"> <?php echo $raza['nom_raza'];?></option>
-                    <?php } ?>
-                  </select>
-                </div>
                 <br>
                 <p align="right"><input type="submit" class="btn btn-success" value="Crear Animal"></p>
               </form>
@@ -349,8 +343,7 @@
                       <td><?php echo $animal['id_tipo'];?></td>
                       <td><?php echo $animal['id_raza'];?></td>
                       <td><?php echo $animal['edad'];?></td>
-                      <td align="center"> <input name="cb[]" type="checkbox"
-                          value="<?php echo $animal['id_animal'];?>">
+                      <td align="center"> <input name="cb[]" type="checkbox" value="<?php echo $animal['id_animal'];?>">
                       </td>
                     </tr>
                     <?php } ?>
@@ -458,3 +451,25 @@
 </body>
 
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#lista1').val(0);
+		recargarLista();
+
+		$('#lista1').change(function(){
+			recargarLista();
+		});
+	})
+</script>
+<script type="text/javascript">
+	function recargarLista(){
+		$.ajax({
+			type:"POST",
+			url:"datos",
+			data:"continente=" + $('#lista1').val(),
+			success:function(r){
+				$('#select2lista').html(r);
+			}
+		});
+	}
+</script>
