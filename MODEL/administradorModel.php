@@ -15,12 +15,12 @@ class AdministradorModel extends Modelo{
     $con = $this->bd->cerrarCon();
   }
 
-  public function agregarRaza($raza)  {
-    $sql = "INSERT INTO raza(nom_raza, id_raza) VALUES ( :nombre, :id)";
+  public function agregarRaza($raza, $especie)  {
+    $sql = "INSERT INTO raza(nom_raza, id_raza, id_especie) VALUES ( :nombre, :id, :especie)";
     $con = $this->bd->conectar();
     $consultar = $con ->prepare($sql);
     $id = $this->tamaño("raza") + 1;
-    $consultar -> execute( array(":id"=>$id, ":nombre"=>$raza) );
+    $consultar -> execute( array(":id"=>$id, ":nombre"=>$raza, ":especie"=>$especie) );
     $con = $this->bd->cerrarCon();
   }
 

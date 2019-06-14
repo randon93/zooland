@@ -129,11 +129,11 @@ class VistasModel extends Modelo{
 
   public function datos($especie)  {
     $con = $this->bd->conectar();
-    $sql="SELECT * FROM raza r INNER JOIN tipo_raza tr ON r.id_raza = tr.id_raza WHERE tr.id_tipo = $especie ";
+    $sql="SELECT * FROM raza WHERE id_especie = $especie ";
     $result = $con -> prepare($sql);
     $result -> execute();
     $cadena="<label>Razas</label> 
-			<select id='lista2' name='lista2'>";
+			<select id='lista2' name='raza'>";
 
     foreach ($result as $ver) {
       $cadena = $cadena . '<option value=' . $ver['id_raza'] . '>' .utf8_encode($ver['nom_raza']) . '</option>';

@@ -15,9 +15,9 @@ class administradorControlador extends Controlador{
   }
 
   public function agregarRaza()  {
-    //$especie = $_POST['especie'];
+    $especie = $_POST['especie'];
     $raza = $_POST['raza'];
-    $this->getCtrModel()->agregarRaza($raza);
+    $this->getCtrModel()->agregarRaza($raza, $especie);
     echo "<script>alert('CITA ELIMINADO ');</script>";
     header("Location:  http://127.0.0.1/zooland/VISTAS/administrador");
   }
